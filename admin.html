@@ -49,6 +49,54 @@
               </el-card>
             </el-col>-->
           </el-row>
+
+
+          <div>
+<div class="el-image_" v-for="(value, key, index) in tableData" style="position: relative;
+    height: 180px;
+    max-width: 300px;
+    float: left;">
+	<div class="button_" style="position: absolute;
+			top: 0;
+			display: inline-block;
+			width: 100%;
+			float: left;
+    z-index: 99;
+			text-align: right;">
+		<el-button
+			size="mini"
+			type="primary"
+			@click="handleWhite(index,value.name)">白名单</el-button>
+		<el-button
+			size="mini"
+			type="info"
+			@click="handleBlock(index,value.name)">黑名单</el-button>
+		<el-button
+			size="mini"
+			type="danger"
+			@click="handleDelete(index,value.name)">删除</el-button>
+	</div>
+	<div class="label_" style="position: absolute;
+			bottom: 0;
+			display: inline-block;
+			width: 100%;
+			float: left;
+    z-index: 99;
+			text-align: right;">
+		<el-tag size="medium">{{ value.metadata }}</el-tag>
+	</div>
+	<el-image
+		style="width: 100%; height: 100%;"
+		:src="'/file/'+value.name"
+		:zoom-rate="1.2"
+		:preview-src-list="['/file/'+value.name]"
+		fit="cover"
+		lazy
+	/>
+</div>
+          </div>
+
+          
           <template>
             <el-table
               :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
