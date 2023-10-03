@@ -305,7 +305,12 @@ fetch("./api/manage/list", requestOptions)
     }
   })
   .then(response => response.text()) 
-  .then(result => {this.tableData=JSON.parse(result);console.log(result);this.Number=this.tableData.length})
+  .then(result => {
+	  const data= JSON.parse(result);
+	  data.sort((a,b)=>{return b.metadata.TimeStamp-a.metadata.TimeStamp})
+	  this.tableData=data;
+	  //this.tableData=JSON.parse(result);
+	  console.log(result);this.Number=this.tableData.length})
   .catch(error => {alert("An error occurred while synchronizing data with the server, please check the network connection");console.log('error', error)});
 
     }
